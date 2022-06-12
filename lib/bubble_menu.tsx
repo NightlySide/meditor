@@ -19,5 +19,5 @@ const floatingToolbarItems: ToolbarItemUnion[] = [
  * Bubble menu for the pre-packaged editors
  */
 export const BubbleMenu: FC = () => {
-	return <FloatingToolbar items={floatingToolbarItems} positioner="selection" placement="bottom" />;
+	return <FloatingToolbar items={floatingToolbarItems} positioner="selection" placement="top-start" />;
 };

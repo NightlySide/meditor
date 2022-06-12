@@ -1,4 +1,10 @@
-import { BoldExtension, ItalicExtension, CalloutExtension, MarkdownExtension } from "remirror/extensions";
+import {
+	BoldExtension,
+	ItalicExtension,
+	CalloutExtension,
+	MarkdownExtension,
+	StrikeExtension
+} from "remirror/extensions";
 import { useRemirror } from "@remirror/react";
 import { useState, useCallback } from "react";
 import { RemirrorJSON } from "remirror";
@@ -10,6 +16,7 @@ export const useManager = () => {
 		extensions: () => [
 			new BoldExtension(),
 			new ItalicExtension(),
+			new StrikeExtension(),
 			new CalloutExtension({ defaultType: "warn" }),
 			new MarkdownExtension()
 		],
