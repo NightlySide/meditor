@@ -1,7 +1,11 @@
 import { BoldExtension, ItalicExtension, CalloutExtension, MarkdownExtension } from "remirror/extensions";
 import { useRemirror } from "@remirror/react";
+import { useState, useCallback } from "react";
+import { RemirrorJSON } from "remirror";
 
-const useReManager = () => {
+const STORAGE_KEY = "meditor-editor-content";
+
+export const useManager = () => {
 	return useRemirror({
 		extensions: () => [
 			new BoldExtension(),
@@ -25,4 +29,19 @@ const useReManager = () => {
 	});
 };
 
-export default useReManager;
+export const useInitialContent = () => {
+	const [initialContent] = useState<RemirrorJSON | undefined>(() => {
+		// Retrieve the JSON from localStorage (or undefined if not found)
+		const content = localStorage.getItem(STORAGE_KEY);
+		return content ? JSON.parse(content) : undefined;
+	});
+
+	return initialContent;
+};
+
+export const useEditorChangeHandler = () => {
+	return useCallback((json: RemirrorJSON) => {
+		// Store the JSON in localstorage
+		localStorage.setItem(STORAGE_KEY, JSON.stringify(json));
+	}, []);
+};

@@ -1,5 +1,11 @@
 .editor-container {
 	max-width: 740px;
+	padding-left: 20px;
+	padding-right: 20px;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.ProseMirror-focused {
+	outline: none;
 }

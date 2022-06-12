@@ -1,31 +1,28 @@
-import "remirror/styles/all.css";
-import { EditorComponent, OnChangeJSON, Remirror } from "@remirror/react";
-import { useCallback, useState } from "react";
-import { RemirrorJSON } from "remirror";
-import useReManager from "./manager";
+import "remirror/styles/core.css";
+import "remirror/styles/components.css";
+import "remirror/styles/extension-positioner.css";
+import "./theme.css";
+import "./main.css";
 
-const STORAGE_KEY = "meditor-editor-content";
+import { EditorComponent, OnChangeJSON, Remirror } from "@remirror/react";
+import { useManager, useEditorChangeHandler, useInitialContent } from "./manager";
+import { BubbleMenu } from "./bubble_menu";
 
 const Meditor = () => {
-	const { manager, state } = useReManager();
+	const { manager, state } = useManager();
 
-	const [initialContent] = useState<RemirrorJSON | undefined>(() => {
-		// Retrieve the JSON from localStorage (or undefined if not found)
-		const content = localStorage.getItem(STORAGE_KEY);
-		return content ? JSON.parse(content) : undefined;
-	});
-
-	const handleEditorChange = useCallback((json: RemirrorJSON) => {
-		// Store the JSON in localstorage
-		localStorage.setItem(STORAGE_KEY, JSON.stringify(json));
-	}, []);
+	const initialContent = useInitialContent();
+	const handleEditorChange = useEditorChangeHandler();
 
 	return (
-		<div className="editor-container remirror-theme">
-			<Remirror manager={manager} initialContent={state}>
-				<OnChangeJSON onChange={handleEditorChange} />
-				<EditorComponent />
-			</Remirror>
+		<div className="editor-container">
+			<div className="remirror-theme">
+				<Remirror manager={manager} initialContent={initialContent ? initialContent : state}>
+					<OnChangeJSON onChange={handleEditorChange} />
+					<EditorComponent />
+					<BubbleMenu />
+				</Remirror>
+			</div>
 		</div>
 	);
 };
