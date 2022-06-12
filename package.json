@@ -1,0 +1,38 @@
+{
+	"name": "meditor",
+	"private": true,
+	"version": "0.0.0",
+	"main": "./dist/meditor.umd.js",
+	"module": "./dist/meditor.es.js",
+	"types": "./dist/lib/meditor.d.ts",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc && vite build",
+		"preview": "vite preview"
+	},
+	"files": [
+		"dist"
+	],
+	"exports": {
+		".": {
+			"import": "./dist/meditor.es.js",
+			"require": "./dist/meditor.umd.js"
+		}
+	},
+	"dependencies": {
+		"@remirror/pm": "2.0.0-beta.0",
+		"@remirror/react": "2.0.0-beta.0",
+		"react": "^18.0.0",
+		"react-dom": "^18.0.0",
+		"remirror": "2.0.0-beta.0"
+	},
+	"devDependencies": {
+		"@types/react": "^18.0.0",
+		"@types/react-dom": "^18.0.0",
+		"@vitejs/plugin-react": "^1.3.0",
+		"typescript": "^4.6.3",
+		"vite": "^2.9.9",
+		"vite-plugin-dts": "^1.2.0",
+		"vite-tsconfig-paths": "^3.5.0"
+	}
+}
